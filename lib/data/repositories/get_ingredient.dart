@@ -5,11 +5,11 @@ import 'package:tech_task/presentation/state/ingredient_list_state.dart';
 
 class GetIngredientNotifier extends StateNotifier<IngredientListState> {
   GetIngredientNotifier(
-      {required this.ref, required BaseRecipeRepository baseRecipeRepository})
+      { this.ref, required BaseRecipeRepository baseRecipeRepository})
       : _baseRecipeRepository = baseRecipeRepository,
         super(const IngredientListState.initial());
 
-  final Ref ref;
+  final Ref? ref;
   final BaseRecipeRepository _baseRecipeRepository;
 
   Future<void> getIngredientList() async {
