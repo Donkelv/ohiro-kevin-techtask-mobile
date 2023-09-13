@@ -21,7 +21,7 @@ mixin _$IngredientListState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(IngredientEntity data) loaded,
+    required TResult Function(List<IngredientEntity> data) loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +30,7 @@ mixin _$IngredientListState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(IngredientEntity data)? loaded,
+    TResult? Function(List<IngredientEntity> data)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ mixin _$IngredientListState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(IngredientEntity data)? loaded,
+    TResult Function(List<IngredientEntity> data)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -131,7 +131,7 @@ class _$Initial implements Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(IngredientEntity data) loaded,
+    required TResult Function(List<IngredientEntity> data) loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -143,7 +143,7 @@ class _$Initial implements Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(IngredientEntity data)? loaded,
+    TResult? Function(List<IngredientEntity> data)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -155,7 +155,7 @@ class _$Initial implements Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(IngredientEntity data)? loaded,
+    TResult Function(List<IngredientEntity> data)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -249,7 +249,7 @@ class _$Loading implements Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(IngredientEntity data) loaded,
+    required TResult Function(List<IngredientEntity> data) loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -261,7 +261,7 @@ class _$Loading implements Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(IngredientEntity data)? loaded,
+    TResult? Function(List<IngredientEntity> data)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -273,7 +273,7 @@ class _$Loading implements Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(IngredientEntity data)? loaded,
+    TResult Function(List<IngredientEntity> data)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -367,7 +367,7 @@ class _$Empty implements Empty {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(IngredientEntity data) loaded,
+    required TResult Function(List<IngredientEntity> data) loaded,
     required TResult Function(String message) error,
   }) {
     return empty();
@@ -379,7 +379,7 @@ class _$Empty implements Empty {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(IngredientEntity data)? loaded,
+    TResult? Function(List<IngredientEntity> data)? loaded,
     TResult? Function(String message)? error,
   }) {
     return empty?.call();
@@ -391,7 +391,7 @@ class _$Empty implements Empty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(IngredientEntity data)? loaded,
+    TResult Function(List<IngredientEntity> data)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -451,7 +451,7 @@ abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({IngredientEntity data});
+  $Res call({List<IngredientEntity> data});
 }
 
 /// @nodoc
@@ -468,9 +468,9 @@ class __$$LoadedCopyWithImpl<$Res>
   }) {
     return _then(_$Loaded(
       data: null == data
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as IngredientEntity,
+              as List<IngredientEntity>,
     ));
   }
 }
@@ -478,10 +478,15 @@ class __$$LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Loaded implements Loaded {
-  const _$Loaded({required this.data});
+  const _$Loaded({required final List<IngredientEntity> data}) : _data = data;
 
+  final List<IngredientEntity> _data;
   @override
-  final IngredientEntity data;
+  List<IngredientEntity> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
   @override
   String toString() {
@@ -493,11 +498,12 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            (identical(other.data, data) || other.data == data));
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -511,7 +517,7 @@ class _$Loaded implements Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(IngredientEntity data) loaded,
+    required TResult Function(List<IngredientEntity> data) loaded,
     required TResult Function(String message) error,
   }) {
     return loaded(data);
@@ -523,7 +529,7 @@ class _$Loaded implements Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(IngredientEntity data)? loaded,
+    TResult? Function(List<IngredientEntity> data)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(data);
@@ -535,7 +541,7 @@ class _$Loaded implements Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(IngredientEntity data)? loaded,
+    TResult Function(List<IngredientEntity> data)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -587,9 +593,9 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements IngredientListState {
-  const factory Loaded({required final IngredientEntity data}) = _$Loaded;
+  const factory Loaded({required final List<IngredientEntity> data}) = _$Loaded;
 
-  IngredientEntity get data;
+  List<IngredientEntity> get data;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -662,7 +668,7 @@ class _$ErrorMessage implements ErrorMessage {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(IngredientEntity data) loaded,
+    required TResult Function(List<IngredientEntity> data) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -674,7 +680,7 @@ class _$ErrorMessage implements ErrorMessage {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(IngredientEntity data)? loaded,
+    TResult? Function(List<IngredientEntity> data)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -686,7 +692,7 @@ class _$ErrorMessage implements ErrorMessage {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(IngredientEntity data)? loaded,
+    TResult Function(List<IngredientEntity> data)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
