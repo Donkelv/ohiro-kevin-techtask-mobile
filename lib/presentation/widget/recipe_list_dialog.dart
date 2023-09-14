@@ -78,41 +78,52 @@ class RecipeListDialog extends ConsumerWidget {
             );
           },
           loaded: (loaded) {
-            return Scrollbar(
-              thumbVisibility: true,
-              child: ListView.builder(
-                  itemCount: loaded.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 25.0.w, vertical: 20.0.h),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            loaded[index].title!,
-                            style: mediumTextInter(),
-                          ),
-                          15.0.verticalSpace,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: loaded[index]
-                                .ingredients!
-                                .map(
-                                  (e) => Text(
-                                    "• $e",
-                                    style: normalText(),
-                                  ),
-                                )
-                                .toList(),
-                          )
-                        ],
-                      ),
-                    );
-                  }),
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:  EdgeInsets.only(top: 25.0.h, left: 25.0.w),
+                  child: Text("Recipe", style: semiLargeTextInter(),),
+                ),
+                ListView.builder(
+                    itemCount: loaded.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 25.0.w, vertical: 20.0.h),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              loaded[index].title!,
+                              style: mediumTextInter(),
+                            ),
+                            15.0.verticalSpace,
+                            Padding(
+                              padding:  EdgeInsets.symmetric(horizontal: 10.0.w),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: loaded[index]
+                                    .ingredients!
+                                    .map(
+                                      (e) => Text(
+                                        "• $e",
+                                        style: normalText(),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    }),
+              ],
             );
           },
           error: (error) {
