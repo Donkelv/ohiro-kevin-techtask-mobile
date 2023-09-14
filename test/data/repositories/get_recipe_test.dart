@@ -28,10 +28,12 @@ void main() {
 
   group('GetRecipeNotifier', () {
     test('Should update state to loaded when Recipe data is fetched', () async {
-      final mockRecipe = RecipeEntity(
-        title: "title",
-        ingredients: ["ingredient 1"],
-      );
+      List<RecipeEntity> mockRecipe = [
+        RecipeEntity(
+          title: "title",
+          ingredients: ["ingredient 1"],
+        )
+      ];
       when(() => mockRecipeRepository.getRecipe("ingredient"))
           .thenAnswer((_) async => Right(mockRecipe));
 
@@ -43,10 +45,9 @@ void main() {
 
     test('Should update state to Empty when Recipe  ingredient  is empty',
         () async {
-      final mockRecipe = RecipeEntity(
-        title: "title",
-        ingredients: [],
-      );
+      List<RecipeEntity> mockRecipe = [
+       
+      ];
       when(() => mockRecipeRepository.getRecipe("ingredient"))
           .thenAnswer((_) async => Right(mockRecipe));
 

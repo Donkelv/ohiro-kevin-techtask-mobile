@@ -17,7 +17,7 @@ class GetRecipeNotifier extends StateNotifier<RecipeListState> {
     response.fold((l) {
       state = RecipeListState.error(message: l.message);
     }, (r) {
-      if (r.ingredients!.isEmpty) {
+      if (r.isEmpty) {
         state = RecipeListState.empty();
       } else {
         state = RecipeListState.loaded(data: r);

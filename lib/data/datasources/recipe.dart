@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart' as dio;
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
@@ -28,14 +26,12 @@ class RecipeRepository extends BaseRecipeRepository {
         print("The response is");
         print(response.data);
       }
-      //Map<String, dynamic> content = response.data;
-      var data = jsonDecode(response.data);
+     
       if (response.statusCode == 200) {
-        List<IngredientEntity> ingredient = data.map((element) {
+        List<IngredientEntity> ingredient =
+            (response.data as List<dynamic>).map((element) {
           return IngredientEntity.fromJson(element);
         }).toList();
-
-        ///IngredientEntity ingredientEntity = IngredientEntity.fromJson(content);
         return Right(ingredient);
       } else {
         return Left(Failure(message: "Problem encountered please try again"));
@@ -53,7 +49,9 @@ class RecipeRepository extends BaseRecipeRepository {
   }
 
   @override
-  Future<Either<Failure, RecipeEntity>> getRecipe(String ingredient) async {
+  Future<Either<Failure, List<RecipeEntity>>> getRecipe(
+      String ingredient) async {
+    debugPrint("the ingredient selected is $ingredient");
     String url = baseUrl + recipesConst + ingredient;
     try {
       final response = await dio.Dio().get(
@@ -69,12 +67,16 @@ class RecipeRepository extends BaseRecipeRepository {
         print("The response is");
         print(response.data);
       }
-      Map<String, dynamic> content = response.data;
+      //Map<String, dynamic> content = response.data;
       if (response.statusCode == 200) {
-        RecipeEntity recipeEntity = RecipeEntity.fromJson(content);
-        return Right(recipeEntity);
+        List<RecipeEntity> recipe =
+            (response.data as List<dynamic>).map((element) {
+          return RecipeEntity.fromJson(element);
+        }).toList();
+        //RecipeEntity recipeEntity = RecipeEntity.fromJson(content);
+        return Right(recipe);
       } else {
-        return Left(Failure(message: content['message']));
+        return Left(Failure(message: "Problem encountered please try again"));
       }
     } catch (err) {
       if (kDebugMode) {
